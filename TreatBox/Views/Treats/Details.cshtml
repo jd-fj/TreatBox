@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+@model TreatBox.Models.Treat
+
+<h2>Treat Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.TreatName): @Html.DisplayFor(model => model.TreatName)</h3>
+
+@if(@Model.Flavors.Count == 0)
+{
+  <p>This treat does not contain any flavors yet</p>
+}
+else
+{
+  <h4>Flavors the treat contains:</h4>
+  <ul>
+  @foreach(var join in Model.Flavors)
+  {
+    <li>@join.Flavor.FlavorName</li>
+    @if (User.Identity.IsAuthenticated && ViewBag.IsCurrentUser)
+    {   
+      @using (Html.BeginForm("DeleteFlavor", "Flavors"))
+      {
+        @Html.Hidden("joinId", @join.TreatFlavorId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  }
+  </ul>
+}
+
+<h2>@Html.ActionLink("Back to treat list", "Index")</h2>
+
+@if (User.Identity.IsAuthenticated && ViewBag.IsCurrentUser)
+{
+  <p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
+  <p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
+  <p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
+}
