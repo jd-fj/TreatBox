@@ -2,7 +2,42 @@
   Layout = "_Layout";
 }
 
+@model TreatBox.Models.MyViewModel;
 
-<p>Something to look at</p>
-<p>@Html.ActionLink("Login", "Index", "Account")</p>
-<p>@Html.ActionLink("Register", "Register", "Account")</p>
+@if (User.Identity.IsAuthenticated)
+{
+<div class="row">
+  <div class="col-6">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <h1>Treats</h1>
+      </div>
+      <ul class="list-group list-group-flush">
+        @foreach (var treat in Model.AllTreats)
+        {
+          <li class="list-group-item"><h3>@Html.ActionLink($"{treat.TreatName}", "Details", new { id = treat.TreatId })</h3></li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <h1>Flavors</h1>
+      </div>
+      <ul class="list-group list-group-flush">
+      @foreach (var flavor in Model.AllFlavors)
+      {
+        <li class="list-group-item"><h3>@Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })</h3></li>
+      }
+      </ul>
+    </div>
+  </div>
+</div>
+}
+else
+{
+  <p>@Html.ActionLink("Login", "Index", "Account")</p>
+  <p>@Html.ActionLink("Register", "Register", "Account")</p>
+}
