@@ -15,7 +15,7 @@
       <ul class="list-group list-group-flush">
         @foreach (var treat in Model.AllTreats)
         {
-          <li class="list-group-item"><h3>@Html.ActionLink($"{treat.TreatName}", "Details", new { id = treat.TreatId })</h3></li>
+          <li class="list-group-item"><h3>@Html.ActionLink($"{treat.TreatName}", "Details", "Treats", new { id = treat.TreatId })</h3></li>
         }
       </ul>
     </div>
@@ -29,7 +29,7 @@
       <ul class="list-group list-group-flush">
       @foreach (var flavor in Model.AllFlavors)
       {
-        <li class="list-group-item"><h3>@Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })</h3></li>
+        <li class="list-group-item"><h3>@Html.ActionLink($"{flavor.FlavorName}", "Details", "Flavors", new { id = flavor.FlavorId })</h3></li>
       }
       </ul>
     </div>
