@@ -15,7 +15,7 @@ namespace TreatBox.ViewModels
       public string Password {get; set;}
 
       [DataType(DataType.Password)]
-      [Display(Name="Confirm password")]
+      [Display(Name="confirm password")]
       [Compare("Password", ErrorMessage="Not a matching pswd")]
       public string ConfirmPassword {get; set;}
     }
