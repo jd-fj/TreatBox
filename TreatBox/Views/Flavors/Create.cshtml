@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model TreatBox.Models.Flavor
+
+<h4>Add a new flavor</h4>
+@using (Html.BeginForm())
+{
+    @Html.Label("Flavor name:")
+    @Html.TextBoxFor(model => model.FlavorName)
+    <input type="submit" value="Add new flavor" />
+}
+<h3>@Html.ActionLink("Show all flavors", "Index")</h3>

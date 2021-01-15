@@ -95,12 +95,12 @@ namespace TreatBox.Controllers
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-      var thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
+      Treat thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
       if (thisTreat == null)
       {
         return RedirectToAction("Details", new { id = id });
       }
-      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
       return View(thisTreat);
     }
     
