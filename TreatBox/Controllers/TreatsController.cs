@@ -23,7 +23,7 @@ namespace TreatBox.Controllers
       _db = db;
     }
 
-    public Task<ActionResult> Index()
+    public ActionResult Index()
     {
       List<Treat> userTreats = _db.Treats.ToList();
       return View(userTreats);

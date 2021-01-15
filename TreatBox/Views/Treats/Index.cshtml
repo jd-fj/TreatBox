@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@using TreatBox.Models;
+@using System.Security.Claims
+@model IEnumerable<TreatBox.Models.Treat>
+
+<h1>Welcome @User.Identity.Name</h1>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Treat treat in Model)
+    {
+      <li>@Html.ActionLink($"{treat.TreatName}", "Details", new { id = treat.TreatId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No treats have been added yet!</h3>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h2>@Html.ActionLink("Add new treat", "Create")</h2>
+}
+<h2>@Html.ActionLink("Home", "Index", "Home")</h2>
