@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace MVCtemplate
+namespace TreatBox
 {
   public class Program
   {

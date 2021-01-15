@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MVCtemplate.Models;
+using TreatBox.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace MVCtemplate
+namespace TreatBox
 {
   public class Startup
   {
@@ -26,11 +26,11 @@ namespace MVCtemplate
       services.AddMvc();
 
       services.AddEntityFrameworkMySql()
-        .AddDbContext<MVCtemplateContext>(options => options
+        .AddDbContext<TreatBoxContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
       services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<MVCtemplateContext>()
+                .AddEntityFrameworkStores<TreatBoxContext>()
                 .AddDefaultTokenProviders();
 
       services.Configure<IdentityOptions>(options =>
