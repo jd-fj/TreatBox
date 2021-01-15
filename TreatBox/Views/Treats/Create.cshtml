@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model TreatBox.Models.Treat
+
+<h2>Add a new treat</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.Label("Treat Name: ")
+  @Html.TextBoxFor(model => model.TreatName, new { required = "required" })
+
+  @if(ViewBag.Flavors.Count > 0)
+  {
+    @Html.Label("Select flavor")
+    @Html.DropDownList("FlavorId")
+  }
+
+  @* @Html.Label("Treat Ingredients")
+  @Html.TextAreaFor(model => model.TreatIngredients) *@
+
+  <input type="submit" value="Add new treat" class="btn btn-default" />
+}
+<h2>@Html.ActionLink("Show all treats", "Index")</h2>
