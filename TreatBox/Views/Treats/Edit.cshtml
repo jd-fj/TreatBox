@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model TreatBox.Models.Treat
+
+<h2>Edit:</h2>
+
+<h4>@Html.Display("treat name")</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TreatId)
+
+    @Html.Label("treat name:")
+    @Html.EditorFor(model => model.TreatName)
+
+    @Html.Label("Select flavor")
+    @Html.DropDownList("FlavorId")
+
+    <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to treats list", "Index")</p>
