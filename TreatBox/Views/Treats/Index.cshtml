@@ -13,7 +13,6 @@
   <ul>
     @foreach (Treat treat in Model)
     {
-      <p>Some stuff</p>
       <li>@Html.ActionLink($"{treat.TreatName}", "Details", new { id = treat.TreatId })</li>
     }
   </ul>
