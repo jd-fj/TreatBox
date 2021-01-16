@@ -110,14 +110,10 @@ CREATE TABLE `TreatFlavor` (
 ## 🛠️ Technologies Used
 * _GitBash_
 * _Visual Studio Code_
-* _GitHub_
 * _C# v 7.3_
 * _.NET Core v 2.2_
-* _MSTest_
 * _ASP.NET Core MVC_
 * _Bootstrap_
-* _CSS_
-* _cshtml_
 * _MySQL Workbench_
 * _Entity Framework Core_
 * _[SQL Designer](https://ondras.zarovi.cz/sql/demo/)_
