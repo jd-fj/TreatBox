@@ -62,8 +62,8 @@
 #### Import Database with SQL Schema
 * Copy and paste the following Schema Create Statement in MySQL Workbench to create this database with it's respective tables.
 ```
-CREATE DATABASE `taylor_delph` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
-USE taylor_delph;
+CREATE DATABASE `taylor_delph_treats` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE taylor_delph_treats;
 
 DROP TABLE IF EXISTS `__EFMigrationsHistory`;
 CREATE TABLE `__EFMigrationsHistory` (
@@ -72,33 +72,40 @@ CREATE TABLE `__EFMigrationsHistory` (
   PRIMARY KEY (`MigrationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `Engineers`;
-CREATE TABLE `Engineers` (
-  `EngineerId` int(11) NOT NULL AUTO_INCREMENT,
-  `EngineerName` longtext,
-  PRIMARY KEY (`EngineerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `Treats`;
+CREATE TABLE `Treats` (
+  `TreatId` int(11) NOT NULL AUTO_INCREMENT,
+  `TreatName` longtext,
+  `TreatIngredients` longtext,
+  `UserId` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`TreatId`),
+  KEY `IX_Treats_UserId` (`UserId`),
+  CONSTRAINT `FK_Treats_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `Licenses`;
-CREATE TABLE `Licenses` (
-  `LicensesId` int(11) NOT NULL AUTO_INCREMENT,
-  `EngineerId` int(11) NOT NULL,
-  `MachineId` int(11) NOT NULL,
-  PRIMARY KEY (`LicensesId`),
-  KEY `IX_Licenses_EngineerId` (`EngineerId`),
-  KEY `IX_Licenses_MachineId` (`MachineId`),
-  CONSTRAINT `FK_Licenses_Engineers_EngineerId` FOREIGN KEY (`EngineerId`) REFERENCES `engineers` (`EngineerId`) ON DELETE CASCADE,
-  CONSTRAINT `FK_Licenses_Machines_MachineId` FOREIGN KEY (`MachineId`) REFERENCES `machines` (`MachineId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `Flavors`;
+CREATE TABLE `Flavors` (
+  `FlavorId` int(11) NOT NULL AUTO_INCREMENT,
+  `FlavorName` longtext,
+  `UserId` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`FlavorId`),
+  KEY `IX_Flavors_UserId` (`UserId`),
+  CONSTRAINT `FK_Flavors_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `Machines`;
-CREATE TABLE `Machines` (
-  `MachineId` int(11) NOT NULL AUTO_INCREMENT,
-  `MachineName` longtext,
-  PRIMARY KEY (`MachineId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `TreatFlavor`;
+CREATE TABLE `TreatFlavor` (
+  `TreatFlavorId` int(11) NOT NULL AUTO_INCREMENT,
+  `TreatId` int(11) NOT NULL,
+  `FlavorId` int(11) NOT NULL,
+  PRIMARY KEY (`TreatFlavorId`),
+  KEY `IX_TreatFlavor_FlavorId` (`FlavorId`),
+  KEY `IX_TreatFlavor_TreatId` (`TreatId`),
+  CONSTRAINT `FK_TreatFlavor_Flavors_FlavorId` FOREIGN KEY (`FlavorId`) REFERENCES `flavors` (`FlavorId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_TreatFlavor_Treats_TreatId` FOREIGN KEY (`TreatId`) REFERENCES `treats` (`TreatId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
-![Licenses Table joining EngineerId with MachineId](./ReadMeAssets/tables.png)
+<!-- ![Licenses Table joining EngineerId with MachineId](./ReadMeAssets/tables.png) -->
 
 ## 🛠️ Technologies Used
 * _GitBash_
@@ -121,7 +128,7 @@ No known bugs at this time
 
 ## 📫 Contact details
 
-If you run into any problems with the site, or need to get in touch with Dr. Sillystringz, please [email her here](mailto:taylulzcode@gmail.com)
+If you run into any problems with the site, please [email me here](mailto:taylulzcode@gmail.com)
 
 ## 📗 License
 
