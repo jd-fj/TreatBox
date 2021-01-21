@@ -74,12 +74,8 @@ namespace TreatBox.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Treat treat, int FlavorId)
+    public ActionResult Edit(Treat treat)
     {
-      if (FlavorId != 0)
-      {
-        _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
-      }
       _db.Entry(treat).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
