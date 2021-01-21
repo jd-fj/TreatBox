@@ -120,7 +120,7 @@ CREATE TABLE `TreatFlavor` (
 
 ## 🐞 Known Bugs
 
-No known bugs at this time
+Treats/AddFlavor/id route will continue adding duplicate Flavors to Treat. 
 
 ## 📫 Contact details
 
