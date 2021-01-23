@@ -98,10 +98,16 @@ namespace TreatBox.Controllers
     [HttpPost]
     public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
-      if (FlavorId != 0)
+      if(FlavorId != 0)
       {
-        _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
+        var returnedJoin = _db.TreatFlavor
+          .Any(join => join.TreatId == treat.TreatId && join.FlavorId == FlavorId);
+          if (!returnedJoin)
+          {
+            _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
+          }
       }
+      _db.Entry(treat).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
