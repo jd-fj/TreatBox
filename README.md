@@ -59,6 +59,10 @@
 * To run the application, enter `$ dotnet run`
 * Your command line will open a server (likely `http://localhost:5000/`). Navigate to this URL in your browser to view the project.
 
+#### Register and Login 
+* To use this app, follow the directions to register an account
+* After registering, login to begin making custom treats and adding flavors
+
 #### Import Database with SQL Schema
 * Copy and paste the following Schema Create Statement in MySQL Workbench to create this database with it's respective tables.
 ```
@@ -105,7 +109,6 @@ CREATE TABLE `TreatFlavor` (
   CONSTRAINT `FK_TreatFlavor_Treats_TreatId` FOREIGN KEY (`TreatId`) REFERENCES `treats` (`TreatId`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
-<!-- ![Licenses Table joining EngineerId with MachineId](./ReadMeAssets/tables.png) -->
 
 ## 🛠️ Technologies Used
 * _GitBash_
@@ -117,10 +120,15 @@ CREATE TABLE `TreatFlavor` (
 * _MySQL Workbench_
 * _Entity Framework Core_
 * _[SQL Designer](https://ondras.zarovi.cz/sql/demo/)_
+* Identity
 
 ## 🐞 Known Bugs
 
-Treats/AddFlavor/id route will continue adding duplicate Flavors to Treat. 
+| Bug | Status | Solution |
+| :------------- | :------------- | :------------- | :------------- |
+| Treats/AddFlavor/ route will continue adding duplicate Flavors to Treat. | Resolved | Missing double == when checking for duplicates in database |
+
+
 
 ## 📫 Contact details
 
